@@ -1,0 +1,79 @@
+---
+layout: post
+status: publish
+published: true
+title: Merge no Visual Studio 2013 com git
+author:
+  display_name: Endrigo Antonini
+  url: http://blog.endrigoantonini.com.br
+author_url: http://blog.endrigoantonini.com.br
+excerpt: "<img class=\"alignleft wp-image-998 size-medium\" src=\"http://blog.endrigoantonini.com.br/wp-content/uploads/2014/07/visual-studio-2013-logo-300x150.png\"
+  alt=\"visual-studio-2013-logo\" width=\"300\" height=\"150\" />Desenvolvendo o <a
+  title=\"Vamoos.lá\" href=\"http://www.vamoos.la/\" target=\"_blank\">Vamoos.lá</a>
+  surgiu a dúvida de como resolver conflitos ao tentar realizar um push/pull no repositório
+  do git utilizando o Visual Studio. Pois bem, como essa situação não é algo corriqueiro
+  de se ver (utilizar git no processo de desenvolvimento com Visual Studio) tive que
+  simular essa situação e sair caçando e testando como atuar nessa situação.\r\n\r\nPara
+  mostrar como atuar e solucionar quando estiver nessa situação criei o procedimento
+  passo a passo para explicar como proceder nesse caso. Esse artigo simula a iteração
+  de dois usuários já que para que ocorra esse problema de merge o fato de ter dois
+  usuários ou dois commits oriundos de repositórios clonados diferentes.\r\n"
+wordpress_id: 984
+wordpress_url: http://blog.endrigoantonini.com.br/?p=984
+date: '2014-07-16 00:56:51 -0300'
+date_gmt: '2014-07-16 03:56:51 -0300'
+categories:
+- Tecnologia
+tags:
+- Microsoft
+- Tecnologia
+- git
+- Visual Studio 2013
+- Merge
+- commit
+- push
+- pull
+comments: []
+---
+<p><img class="alignleft wp-image-998 size-medium" src="/wp-content/uploads/2014/07/visual-studio-2013-logo-300x150.png" alt="visual-studio-2013-logo" width="300" height="150" />Desenvolvendo o <a title="Vamoos.lá" href="http://www.vamoos.la/" target="_blank">Vamoos.lá</a> surgiu a dúvida de como resolver conflitos ao tentar realizar um push/pull no repositório do git utilizando o Visual Studio. Pois bem, como essa situação não é algo corriqueiro de se ver (utilizar git no processo de desenvolvimento com Visual Studio) tive que simular essa situação e sair caçando e testando como atuar nessa situação.</p>
+<p>Para mostrar como atuar e solucionar quando estiver nessa situação criei o procedimento passo a passo para explicar como proceder nesse caso. Esse artigo simula a iteração de dois usuários já que para que ocorra esse problema de merge o fato de ter dois usuários ou dois commits oriundos de repositórios clonados diferentes.<br />
+<a id="more"></a><a id="more-984"></a><br />
+Então <a title="Vamoos.lá" href="http://www.vamoos.la/" target="_blank">Vamoos.lá</a>?</p>
+<p><strong>Situação original em ambos os repositórios:</strong></p>
+<p><a href="/wp-content/uploads/2014/07/001-original.png" target="_blank"><img class="aligncenter wp-image-997 size-large" src="/wp-content/uploads/2014/07/001-original-1024x648.png" alt="001-original" width="625" height="395" /></a></p>
+<p>O fonte original é relativamente simples afinal nosso objetivo é demonstrar como resolver conflito e não o fonte. Como pode ser observado através da imagem existem dois métodos sendo que cada um exibe uma mensagem para o usuário.</p>
+<p><strong>Iteração do Usuário 1 / Repositório 1:</strong></p>
+<p><a href="/wp-content/uploads/2014/07/002-usuario01-alteracoes-1024x648.png" target="_blank"><img class="aligncenter wp-image-996 size-large" src="/wp-content/uploads/2014/07/002-usuario01-alteracoes-1024x648.png" alt="002-usuario01-alteracoes" width="625" height="395" /></a></p>
+<p>O usuário realiza as alterações desejadas, nesse caso simplesmente alteramos a mensagem de exibição (imagem acima) para uma outra mensagem.<br />
+E efetua o commit e push para o repositório central (imagem abaixo).</p>
+<p><a href="/wp-content/uploads/2014/07/003-usuario01-commit.png" target="_blank"><img class="aligncenter wp-image-994 size-large" src="/wp-content/uploads/2014/07/003-usuario01-commit-1024x648.png" alt="003-usuario01-commit" width="625" height="395" /></a></p>
+<p>Com isso finalizamos o processo de alteração do primeiro usuário. Simples não?!<br />
+<!––nextpage––><br />
+<strong>Iteração do Usuário 2 / Repositório 2:</strong></p>
+<p>Então começa o processo do segundo usuário, você no caso. E efetua algumas alterações no fonte. Abaixo segue o fonte com as atualização que foram efetuadas tanto no primeiro método, onde foram alteradas a mensagem padrão e adicionadas novas linhas, bem como no segundo método (imagem abaixo).</p>
+<p><a href="/wp-content/uploads/2014/07/004-minhas-alteracoes.png" target="_blank"><img class="aligncenter wp-image-995 size-large" src="/wp-content/uploads/2014/07/004-minhas-alteracoes-1024x648.png" alt="004-minhas-alteracoes" width="625" height="395" /></a></p>
+<p>Então, como de praxe, tendo terminado o trabalho irá efetuar o commit para submeter ao repositório central (imagem abaixo).<br />
+<a href="/wp-content/uploads/2014/07/005-minhas-alteracoes-commit.png" target="_blank"><img class="aligncenter wp-image-993 size-large" src="/wp-content/uploads/2014/07/005-minhas-alteracoes-commit-1024x648.png" alt="005-minhas-alteracoes-commit" width="625" height="395" /></a></p>
+<p>E eis que de repente, ao tentar realizar o push para o servidor acontece a seguinte mensagem:<br />
+<a href="/wp-content/uploads/2014/07/006-minhas-alteracoes-push.png" target="_blank"><img class="aligncenter wp-image-992 size-large" src="/wp-content/uploads/2014/07/006-minhas-alteracoes-push-1024x648.png" alt="006-minhas-alteracoes-push" width="625" height="395" /></a></p>
+<p>Normal! A questão é simples! O repositório central está rejeitando sua operação pois tentou-se submeter alguns commits mas seu repositório local não contém todos os commits que o repositório central possui (Explicação bem generalista e sem muito termo técnico para não confundir). Ou seja, antes de enviar suas alterações, você deve baixar as alterações que o repositório central possui e o repositório local não.</p>
+<p>Mas por que isso? Por que não fazer o merge automático no repositório central? Porque como foi realizado alterações nos dois repositórios, o repositório central exige que o merge seja feito pelo usuário pois não é ele (repo central) quem tem a capacidade de analisar se o que encontra-se em um fonte deve ou não ser adicionado a versão final ou de que forma essa alteração deva ser armazenada.</p>
+<p>Como resolver então? É necessário fazer um pull para que o repositório local receba os commits que o repositório central possue e o local não.</p>
+<p>Ponto interessante: se as alterações locais e remotas foram realizadas em arquivos distintos, o próprio git faz o merge para você.</p>
+<p>Mas, esse não é o caso aqui. Então ao efetuar o pull a mensagem abaixo é exibida, onde o git está alertando que existem conflitos a serem resolvidos (imagem abaixo).<br />
+<a href="/wp-content/uploads/2014/07/007-minhas-alteracoes-pull.png" target="_blank"><img class="aligncenter wp-image-991 size-large" src="/wp-content/uploads/2014/07/007-minhas-alteracoes-pull-1024x648.png" alt="007-minhas-alteracoes-pull" width="625" height="395" /></a></p>
+<p>Ao ver essa mensagem, devemos selecionar a opção "Resolve the conflicts" onde será exibida a lista de arquivos que encontram-se em situação de conflito.  Ao selecionar o arquivo irá aparecer as opções para você comparar os estados do arquivo local e remoto.</p>
+<p><img class="aligncenter wp-image-990 size-large" src="/wp-content/uploads/2014/07/008-minhas-alteracoes-start-merge-1024x648.png" alt="008-minhas-alteracoes-start-merge" width="625" height="395" />Para solucionar o problema existem três opções (imagem acima), são elas:</p>
+<ul>
+<li>Take Local: Descarta as alterações que encontram-se no servidor e utiliza seu arquivo local. Tome cuidado com essa opção pois as alterações que foram efetuadas pelo usuário remoto serão descartadas e o fonte que encontra-se em sua máquina será utilizado por completo!! Não somente nos trechos de conflito.</li>
+<li>Take remote: Descarta as alterações que encontram-se localmente e utiliza o arquivo arquivo que encontra-se remotamente. Tome cuidado com essa opção pois as alterações que foram efetuadas localmente serão descartadas e o fonte que encontra-se no repositório central será utilizado por completo!! Não somente nos trechos de conflito.</li>
+<li>Merge: Será aberto uma tela dividida em três (imagem abaixo) onde na comparação acima irá trazer o tanto o fonte remoto como o local lado a lado para que seja possível comparar e no trecho inferior o resultado que será utilizado.</li>
+</ul>
+<p><a href="/wp-content/uploads/2014/07/009-minhas-alteracoes-merge.png" target="_blank"><img class="aligncenter wp-image-989 size-large" src="/wp-content/uploads/2014/07/009-minhas-alteracoes-merge-1024x648.png" alt="009-minhas-alteracoes-merge" width="625" height="395" /></a></p>
+<p>Nesse caso utilizamos a opção "Merge" e efetuamos as alterações desejadas. Após efetuar essas alterações acionamos a função "Accept Merge". Isso indica para o VS que o merge foi efetuado.</p>
+<p>Após ter efetuado esse procedimento para todos os arquivos que encontram-se em conflito será exibida a opções "Commit Merge" E ao selecionar essa opção será exibida a tela de commit solicitando um comentário para o mesmo, por padrão já irá trazer uma mensagem com um texto indicando os arquivos que foram realizados o commit.</p>
+<p><a href="/wp-content/uploads/2014/07/011-minhas-alteracoes-commit-merge.png" target="_blank"><img class="aligncenter wp-image-987 size-large" src="/wp-content/uploads/2014/07/011-minhas-alteracoes-commit-merge-1024x648.png" alt="011-minhas-alteracoes-commit-merge" width="625" height="395" /></a></p>
+<p>Ao efetuar esse commit basta apenas efetuar o push para o servidor das alterações.<a href="/wp-content/uploads/2014/07/012-minhas-alteracoes-unsync.png" target="_blank"><br />
+</a></p>
+<p><a href="/wp-content/uploads/2014/07/013-minhas-alteracoes-push.png" target="_blank"><img class="aligncenter wp-image-985 size-large" src="/wp-content/uploads/2014/07/013-minhas-alteracoes-push-1024x648.png" alt="013-minhas-alteracoes-push" width="625" height="395" /></a></p>
+<p><span class="b5" style="color: #000000;">Et voilà! Seu merge foi realizado!</span></p>

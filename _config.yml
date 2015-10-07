@@ -1,0 +1,45 @@
+title: Endrigo Antonini
+description: Tecnologia, Informa&#231;&#227;o, Atualidade
+url: http://blog.endrigoantonini.com.br
+baseurl: ''
+
+author:
+  name: 'Endrigo Antonini'
+
+paginate_path: 'page/:num/'
+permalink: :year/:month/:day/:title/
+timezone: America/Sao_Paulo
+
+markdown: redcarpet
+highlighter: pygments
+paginate: 10
+
+include: [.htaccess]
+
+gems:
+ # - jekyll-mentions
+ - jemoji
+ - jekyll-redirect-from
+
+navigation:
+ - title: Home
+   url: /index.html
+ - title: About
+   url: /about
+ - title: Contact
+   url: /contact
+
+social:
+   github: antonini
+   twitter: antonini
+
+# Custom vars
+google_analytics: 'UA-3686179-1'
+show_related_posts: true
+disqus_shortname: endrigoantonini
+
+ads:
+  show_ads: true
+  google:
+    client: 'ca-pub-6910124936664106'
+    slot: '2081252185'

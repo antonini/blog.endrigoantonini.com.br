@@ -1,0 +1,29 @@
+# Download de arquivos imagens utilizadas pelos posts.
+grep -RoP 'src="\K[^"]*' * --color --no-filename | sort | uniq | grep endrigo  | sed -r 's/http:\/\/[blogw].*.endrigoantonini.com.br\/(wordpress\/)?//p' | awk '{print "curl --create-dirs " $1 " -o " $1 }'
+
+
+# Download outros conteudos.
+grep -RoP 'href="\K[^"]*' * --color --no-filename | sort | uniq | grep endrigoantonini | grep "png\|jpg\|attachment\|pdf" | sed -r 's/http:\/\/[blogw].*.endrigoantonini.com.br\/(wordpress\/)?//p' | awk '{print "curl --create-dirs http://blog.endrigoantonini.com.br/" $1 " -o " $1 }' | sh
+
+
+# Remove endrigoantonini.com.br de SRC assim faz com que a URL use caminho relativo.
+grep -RoP 'src="\K[^"]*' * --color | awk -F : '{print $1}' | sort | uniq | awk -v q="'" '{print "sed -i -r " q "s/src=\"http:\\/\\/[blogw].*.endrigoantonini.com.br(\\/wordpress)?/src=\"/g" q " " $1 }' | sh
+
+# Search URL's
+grep -RoP 'href="\K[^"]*' * --color --no-filename | sort | uniq | grep endrigoantonini | grep "png\|jpg\|attachment\|pdf" | awk -v q="'" -v qq="\"" '{print "echo [!] " $1 " && grep -Rl " $1 " | grep -v '_site' | awk " q "{ print qq AAA qq $1}" q  }' | sh
+
+grep -RoP 'href="\K[^"]*' * --color --no-filename | sort | uniq | grep endrigoantonini | grep "png\|jpg\|attachment\|pdf" | awk -v q="'" '{print "sed -i -r " q "s/href=\"http:\\/\\/[blogw].*.endrigoantonini.com.br(\\/wordpress)?/src=\"/g" q " " $1 }'
+
+
+grep -RoP 'href="\K[^"]*' * --color --no-filename | sort | uniq | grep endrigoantonini | grep "png\|jpg\|attachment\|pdf" | awk '{print "echo [!] " $1 " && grep -Rl " $1 " | grep -v '_site' " }' | sh
+
+
+# Troca URL de HREF de endrigoantonini.com.br para caminho relativo   
+for url in `grep -RoP 'href="\K[^"]*' * --color --no-filename | sort | uniq | grep endrigoantonini | grep "png\|jpg\|attachment\|pdf"`; do for file in `grep -Rl $url | grep -v '_site'`; \
+do \
+  export newurl=`echo $url | sed -r 's/http:\/\/[blogw].*.endrigoantonini.com.br(\/wordpress)?//g'`;  \
+  export newurl=`echo $newurl | sed -r 's/\//\\\\\//g'`; \
+  export oldurl=`echo $url    | sed -r 's/\//\\\\\//g'`; \
+  echo $newurl -- $url -- $file; \
+  sed -i -r s/$(echo $oldurl)/$(echo $newurl)/g $file; \
+done; done

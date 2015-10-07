@@ -1,0 +1,4 @@
+---
+---
+RewriteRule ^wordpress/(.+) /$1 [R,L]
+RewriteRule ^blog/(.+) /$1 [R,L]

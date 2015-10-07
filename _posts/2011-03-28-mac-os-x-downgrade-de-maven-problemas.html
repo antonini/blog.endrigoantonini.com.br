@@ -1,0 +1,66 @@
+---
+layout: post
+status: publish
+published: true
+title: Mac OS X + Downgrade de Maven = Problemas!
+author:
+  display_name: Endrigo Antonini
+  url: http://blog.endrigoantonini.com.br
+author_url: http://blog.endrigoantonini.com.br
+excerpt: "Esse fim de semana, estava fazendo pesquisas sobre forma de compilação de
+  projeto Adobe Flex (esse conteúdo também irá virar post) utilizando o Apache Maven.
+  E em determinado momento precisei fazer um downgrade do Maven 3.x para 2.x, até
+  ai tranquilo, pois eu tinha acabado de fazer a instalação do 3.x, então sabia de
+  cabeça quais os arquivos de configuração alterei.\r\n"
+wordpress_id: 584
+wordpress_url: http://blog.endrigoantonini.com.br/?p=584
+date: '2011-03-28 11:59:34 -0300'
+date_gmt: '2011-03-28 14:59:34 -0300'
+categories:
+- Artigos
+- Tecnologia
+tags:
+- Java
+- Maven
+- Apache
+- NoClassDefFoundError
+- Mac OS X
+comments: []
+---
+<p>Esse fim de semana, estava fazendo pesquisas sobre forma de compilação de projeto Adobe Flex (esse conteúdo também irá virar post) utilizando o Apache Maven. E em determinado momento precisei fazer um downgrade do Maven 3.x para 2.x, até ai tranquilo, pois eu tinha acabado de fazer a instalação do 3.x, então sabia de cabeça quais os arquivos de configuração alterei.<br />
+<a id="more"></a><a id="more-584"></a><br />
+Mas "a vida é uma caixinha de surpresas"... E de fato, para minha surpresa após realizar o downgrade e fazer uma reconfiguração das variáveis de sistema para apontar para esta versão, meu Maven parou de funcionar por completo!! Nem mesmo um comando básico como para exibir a versão funcionava.</p>
+<p><code>$ mvn -v</code><br />
+<strong><em><small>Comando para exibir a versão</small></em></strong></p>
+<p>Quando eu executava qualquer tipo de comando para o Maven recebia uma excessão Java.</p>
+<p><code>$ mvn -v<br />
+Exception in thread "main" java.lang.NoClassDefFoundError: org/codehaus/plexus/classworlds/launcher/Launcher</code><br />
+<small><strong><em>Excessão ao executar comando Maven</em></strong></small></p>
+<p>Depois desse erro ocorrer, baixei todas as versões que estavam disponíveis do Maven no site acreditando fielmente de que havia sido problema de download corrompido e ou falha minha ao reconfigurar as variáveis na instalação.<br />
+Cheguei a remover todos os arquivos que baixei, remover todas as configurações que havia feito e reiniciar a máquina (a velha história do sai do desliga o fusquinha sai do fusquinha e depois de um tempo recomeça o processo). Mas nem mesmo essa simpatia resolveu... ehehehh...<br />
+Óbvio que enquanto fazia todos esses processos já estava pesquisando para ver se alguém alguma vez na vida já havia tido esse tipo de problema e por incrível que pareça, pesquisas com palavras chave somente sobre Maven não me resultaram em nada!! Foi quando me ocorreu a idéia de que isso poderia ser um problema isolado para Mac's, e esse foi quando encontrei o post do <a href="http://cyntech.wordpress.com/2011/03/09/maven-2-error/">Cyntech</a> falando sobre esse problema e então resolvi falar sobre ele na nossa língua!</p>
+<p>Esse erro ocorre pelo seguinte ponto. Em uma das atualizações do Mac, junto com a nova versão do Java ele também instalou a versão 3.0.3 do maven em um diretório do sistema.<br />
+Como descobrir isso e corrigir para utilizar a versão que você deseja?<br />
+Vamos ao passo a passo então:</p>
+<p>Abra um terminal, porque vamos brincar com alguns comandos!!</p>
+<p><code>$ which mvn<br />
+/usr/bin/mvn</code><br />
+<strong><em><small>Comando para exibir de onde está buscando determinado aplicativo</small></em></strong></p>
+<p>A segunda linha diz de onde ele vem e na grande maioria das vezes (a menos que você tenha alterado) isso é um link simbólico para outro ponto da máquina.<br />
+Vamos então buscar para onde isso está sendo "linkado".</p>
+<p><code>$ ls -la /usr/bin/mvn<br />
+lrwxr-xr-x  1 root  wheel  24 11 Mar 18:05 /usr/bin/mvn -> /usr/share/maven/bin/mvn</code><br />
+<strong><em><small>Exibe detalhes de um link simbólico</small></em></strong></p>
+<p>Como podemos ver ele está referenciando para "/usr/share/maven..." mas, novamente, normalmente isso deve ser um link simbólico para outro ponto. Portanto vamos investigar novamente:</p>
+<p><code>$ cd /usr/share/<br />
+$ ls -la maven<br />
+lrwxr-xr-x    1 root   wheel    16 11 Mar 18:05 maven -> java/maven-3.0.2</code></p>
+<p>Então, o que vamos fazer é alterar esse link simbólico para a que nós desejamos.<br />
+Onde no comando abaixo a pasta "/opt/public/technology/apache-maven-2.2.1/" é o diretório onde instalei meu Maven.</p>
+<p><code>$ sudo mv maven maven.temp<br />
+$ sudo ln -s <u>/opt/public/technology/apache-maven-2.2.1/</u> maven<br />
+$ mvn -v<br />
+Apache Maven 2.2.1 (r801777; 2009-08-07 05:16:01+1000)<br />
+</code></p>
+<p>Pronto.</p>
+<p>Como pode ser visto na saída do comando "mvn -v" A versão corrente do Maven é a 2.2.1.</p>

@@ -1,0 +1,132 @@
+---
+layout: post
+status: publish
+published: true
+title: Instalação de um servidor Jenkins
+author:
+  display_name: Endrigo Antonini
+  url: http://blog.endrigoantonini.com.br
+author_url: http://blog.endrigoantonini.com.br
+excerpt: "<img class=\"alignleft size-medium wp-image-892\" alt=\"jenkins-screenshot\"
+  src=\"http://blog.endrigoantonini.com.br/wp-content/uploads/2013/01/jenkins-screenshot-300x173.png\"
+  width=\"300\" height=\"173\" />A pedidos do amigo <a title=\"Willian Mews\" href=\"http://www.mews.com.br/\"
+  target=\"_blank\">Willian Mews</a> irei fazer esse tutorial referente a instalação
+  e configuração de um servidor Jenkins.\r\n\r\n<strong>Introdução</strong>\r\nAfinal,
+  o que é o Jenkins? <a href=\"http://jenkins-ci.org/\" target=\"_blank\">Jenkins</a>
+  é servidor open-source de Integração Contínua e pode ser rodado de forma standalone
+  (como uma aplicação isolada) ou como uma web aplicação dentro de um servidor web
+  com suporte Java (exemplo Tomcat).\r\n\r\n<strong>Integração Contínua</strong>\r\nIntegração
+  Contínua (CI - Continuous Integration) é uma prática dentro da área de engenharia
+  de software que tem por objetivo realizar de forma automatizada compilações parciais
+  ou totais do(s) software(s) que está(ão) sendo desenvolvido(s), testes unitários,
+  testes integrados e outras atividades que a ferramenta em questão possa executar
+  de forma automática para garantir a qualidade do produto. Vale apena ressaltar que
+  essa prática surgiu dentre os estudos de metodologias ágeis e é uma prática que
+  vem se difundindo cada vez mais dentro do mercado haja visto que essa ferramenta
+  consegue destacar problemas antes de que seja realizada uma release do produto.\r\n"
+wordpress_id: 889
+wordpress_url: http://blog.endrigoantonini.com.br/?p=889
+date: '2013-01-23 00:48:02 -0200'
+date_gmt: '2013-01-23 02:48:02 -0200'
+categories:
+- Artigos
+- Tecnologia
+tags:
+- Java
+- Maven
+- Tecnologia
+- Jenkins
+- CI
+- Integração Contínua
+- Continuous Integration
+- HOWTO
+- git
+- Qualidade
+comments:
+- id: 7639
+  author: Endrigo Antonini
+  author_email: facebook.100001469007361@example.com
+  author_url: http://facebook.com/profile.php?id=100001469007361
+  date: '2013-01-23 00:51:22 -0200'
+  date_gmt: '2013-01-23 02:51:22 -0200'
+  content: Willian Mews, ta ae o post rapaz!!! hehehehe
+- id: 7643
+  author: Carlos Alexandro Becker
+  author_email: facebook.1577929994@example.com
+  author_url: http://facebook.com/profile.php?id=1577929994
+  date: '2013-01-23 02:37:10 -0200'
+  date_gmt: '2013-01-23 04:37:10 -0200'
+  content: <a href="http://facebook.com/profile.php?id=1577929994" target="_blank">Carlos
+    Alexandro Becker</a> liked this on Facebook.
+- id: 7656
+  author: Gabriel Ziba
+  author_email: facebook.100000841949036@example.com
+  author_url: http://facebook.com/profile.php?id=100000841949036
+  date: '2013-01-23 09:55:40 -0200'
+  date_gmt: '2013-01-23 11:55:40 -0200'
+  content: <a href="http://facebook.com/profile.php?id=100000841949036" target="_blank">Gabriel
+    Ziba</a> liked this on Facebook.
+- id: 7666
+  author: Arian Rodrigo Pasquali
+  author_email: facebook.635966130@example.com
+  author_url: http://facebook.com/profile.php?id=635966130
+  date: '2013-01-23 18:08:50 -0200'
+  date_gmt: '2013-01-23 20:08:50 -0200'
+  content: <a href="http://facebook.com/profile.php?id=635966130" target="_blank">Arian
+    Rodrigo Pasquali</a> liked this on Facebook.
+- id: 7667
+  author: Vinícius Michelutti
+  author_email: facebook.100001053208610@example.com
+  author_url: http://facebook.com/profile.php?id=100001053208610
+  date: '2013-01-23 18:08:52 -0200'
+  date_gmt: '2013-01-23 20:08:52 -0200'
+  content: <a href="http://facebook.com/profile.php?id=100001053208610" target="_blank">Vinícius
+    Michelutti</a> liked this on Facebook.
+- id: 7690
+  author: Willian Mews
+  author_email: facebook.1647562762@example.com
+  author_url: http://facebook.com/profile.php?id=1647562762
+  date: '2013-01-23 23:42:37 -0200'
+  date_gmt: '2013-01-24 01:42:37 -0200'
+  content: Muito bom cara. hahahaha Valeu! Servirá muito para mim e para todos que
+    quiserem implantar um CI na empresa.
+---
+<p><img class="alignleft size-medium wp-image-892" alt="jenkins-screenshot" src="/wp-content/uploads/2013/01/jenkins-screenshot-300x173.png" width="300" height="173" />A pedidos do amigo <a title="Willian Mews" href="http://www.mews.com.br/" target="_blank">Willian Mews</a> irei fazer esse tutorial referente a instalação e configuração de um servidor Jenkins.</p>
+<p><strong>Introdução</strong><br />
+Afinal, o que é o Jenkins? <a href="http://jenkins-ci.org/" target="_blank">Jenkins</a> é servidor open-source de Integração Contínua e pode ser rodado de forma standalone (como uma aplicação isolada) ou como uma web aplicação dentro de um servidor web com suporte Java (exemplo Tomcat).</p>
+<p><strong>Integração Contínua</strong><br />
+Integração Contínua (CI - Continuous Integration) é uma prática dentro da área de engenharia de software que tem por objetivo realizar de forma automatizada compilações parciais ou totais do(s) software(s) que está(ão) sendo desenvolvido(s), testes unitários, testes integrados e outras atividades que a ferramenta em questão possa executar de forma automática para garantir a qualidade do produto. Vale apena ressaltar que essa prática surgiu dentre os estudos de metodologias ágeis e é uma prática que vem se difundindo cada vez mais dentro do mercado haja visto que essa ferramenta consegue destacar problemas antes de que seja realizada uma release do produto.<br />
+<a id="more"></a><a id="more-889"></a><br />
+<strong>Objetivo</strong><br />
+O objetivo desse HOWTO é que ao final desse artigo você tenha uma instância local instalada configurada e em execução do Jenkins.<br />
+Iremos realizar a instalação e configuração do Jenkins em modo Standalone.<br />
+Os passos aqui executados não são de grande diferença em outros sistemas operacionais, qualquer dúvida de algum comando que tenha sido realizado ou de configuração específica não hesite em perguntar.</p>
+<p><strong>Requisitos</strong></p>
+<ul>
+<li>Conhecimento de XXXXXX</li>
+<li>Conhecimento de Instalação de aplicativos</li>
+<li>Java?!?</li>
+<li>Maven?!?</li>
+</ul>
+<p><strong>Instalação</strong><br />
+<em><strong>Passo 1:</strong></em> Acesse o site do <a href="http://jenkins-ci.org/" target="_blank">Jenkins</a> e no canto direito você irá encontrar as possibilidades para efetuar download. Na verdade você tem apenas duas possibilidades para escolher: empacotamento para servidor web (WAR) ou através de um instalador. No nosso caso iremos utilizar o instalador, portanto identifique qual o sistema operacional está utilizando e baixe a versão correspondente.</p>
+<p><a href="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-23-à-00.38.58.png" target="_blank"><img src="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-23-à-00.38.58-300x226.png" alt="Capture d’écran 2013-01-23 à 00.38.58" width="300" height="226" class="aligncenter size-medium wp-image-918" /></a></p>
+<p><em><strong>Passo 2:</strong></em> O processo de instalação é muito fácil. É o famoso processo NNF (Next - Next - Finish). Após terminar de realizar a instalação, um browser irá abrir automaticamente, <s>não se assuste pois esse não se trata de um novo complemento em seu browser nem mesmo de uma página pedindo doação</s> e a mágica está feita! Você tem um servidor Jenkins instalado! Encerramos por aqui!<br />
+Brincadeira, agora vem a configuração...</p>
+<p><a href="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-18-à-02.33.34.png" target="_blank"><img class="aligncenter size-medium wp-image-897" alt="Capture d’écran 2013-01-18 à 02.33.34" src="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-18-à-02.33.34-300x219.png" width="300" height="219" /></a></p>
+<p><em><strong>Passo 3:</strong></em> A configuração se dá através da própria interface web que o software abriu, que por padrão esse endereço com essa porta irão responder: <a href="http://localhost:8080/" target="_blank">http://localhost:8080/</a>. Iniciaremos com a criação de um usuário e senha que possa fazer tudo e deixar que o usuário anônimo só possa ver a informação. Para isso acesse o link "<em>Manage Jenkins</em>".<br />
+Dentro dessa tela entre na função: "<em>Configure Global Security</em>".<br />
+Selecione a função "<em>Enable security</em>".<br />
+Nessa tela existe uma porção de formas de realizar a validação dos usuários, no nosso caso vamos nos basear que teremos que cadastrar os usuários na própria ferramenta. Na guia "<em>Access Control</em>" no grupo "<em>Security Realm</em>" selecione a opção: "<em>Jenkins's own user database</em>". Deixe a função "<em>Allow users to sign up</em>" se deseja que seus usuários possam se cadastrar, por questões de segurança prefiro desmarcar essa opção. Só terá usuário no sistema quem deve ter usuário no sistema. A parte mais importante vem agora que seria o grupo "<em>Authorization</em>". Nesse grupo selecione a opção "<em>Matrix-based security</em>", ou seja, é uma matrix de segurança, onde se dá acesso a usuário por usuário e/ou grupo por grupo.<br />
+<a href="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-18-à-02.45.12.png" target="_blank"><img class="aligncenter size-medium wp-image-899" alt="Capture d’écran 2013-01-18 à 02.45.12" src="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-18-à-02.45.12-300x219.png" width="300" height="219" /></a><br />
+Adicione o nome de usuário que desejar no campo texto e selecione todas as funções possíveis para seu usuário. No usuário "<em>Anonymous</em>" Deixe somente a opção Read habilitada. Pronto, podemos prosseguir.<br />
+Atenção, como não é objetivo desse HOWTO não irei tratar referente a opção "<em>Prevent Cross Site Request Forgery exploits</em>". Essa é uma função muito importante, ainda mais se for possível acessar seu Jenkins de fora da organização.<br />
+<p><em><strong>Passo 5:</strong></em> Dependendo de qual SCM (Source Code Management) você utilizar, você deverá instalar o plugin de conectividade antes. Nesse caso irei instalar os plugins para acesso ao GIT através das opções e selecione "<em>Manage Jenkins</em>" &gt; "<em>Plugin Manager</em>". Na tela a seguir vá em: "Available" e divirta-se com a variedade e quantidade de plugins disponíveis, mas não se esqueça do principal que seria procurar o plugin do seu SCM.<br />
+Após selecionar todos, clique em "Install without restart". Normalmente na tela que vem a seguir você irá esperar ele efetuar o download do plugin e tentar instalar, se tudo der certo, siga em frente usando o plugin, em caso de falha, tente reiniciar o Jenkins para que ele efetue a instalação / atualização da biblioteca.</p>
+<p><em><strong>Passo 6:</strong></em> Para realizar a configuração do ambiente é necessário que você acesse "<em>Manage Jenkins</em>" &gt; "<em>Configuration System</em>". Nessa tela você precisará realizar a configuração indicando onde está seu Java instalado, onde está seu Maven instalado, credenciais de acesso a sistema de e-mail e outras informações. Essa tela eu sugiro que você analise com calma e lendo de preferência o help das funções para entender melhor o que cada uma executa.<br />
+Para nosso exemplo é primordial que seja configurado o Java e o Maven.</p>
+<p><em><strong>Passo 7:</strong></em> Comece a criar os JOBS! Nesse exemplo irei conectar o Jenkins a um projeto que tenho dentro do github desenvolvido em Java utilizando Maven. Na primeira tela informe um nome para seu projeto e o tipo em que ele será compilado. Nesse caso  selecionei um projeto do tipo "maven 2 / 3" pois é a forma como desenvolvi meu projeto.</p>
+<p><em><strong>Passo 8:</strong></em> No passo seguinte inicie a configuração, selecione qual o repositório dos fontes, nesse caso, GIT. iremos utilizar a url: <a href="https://github.com/antonini/java-utils.git">https://github.com/antonini/java-utils.git</a>. Nas triggers para build existem várias possibilidades, uma dela é para verificar se há mudanças no repositório e em caso de mudanças, ai sim dispara a construção que seria a opção "Poll SCM". Nesse exemplo iremos utilizar a opção: "Build periodically" que fará uma construção periódica. Iremos configurar para que seja executado a cada 5 minutos, ou seja "5 * * * *".</p>
+<p><a href="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-23-à-00.25.08.png" target="_blank"><img src="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-23-à-00.25.08-300x248.png" alt="Capture d’écran 2013-01-23 à 00.25.08" width="300" height="248" class="aligncenter size-medium wp-image-914" /></a></p>
+<p><em><strong>Passo 9:</strong></em> Logo após isso, salve as alterações e na tela do Job, clique em "Build now".Após um período de tempo você verá o ícone alertando que a compilação ocorreu sem problemas!  <em>Et voilà</em>! Você o Jenkins configurado e seu primeiro Job configurado.</p>
+<p><a href="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-23-à-00.34.58.png" target="_blank"><img src="/wp-content/uploads/2013/01/Capture-d’écran-2013-01-23-à-00.34.58-300x248.png" alt="Capture d’écran 2013-01-23 à 00.34.58" width="300" height="248" class="aligncenter size-medium wp-image-916" /></a></p>
