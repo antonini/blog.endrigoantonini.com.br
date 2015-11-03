@@ -6,6 +6,18 @@ title: About Long Haul
 <div class="post">
 	<h1 class="pageTitle">About</h1>
 	<img src="{{ '/assets/img/endrigoantonini.jpg' | prepend: site.baseurl }}" alt="Endrigo Antonini">
+	<p class="intro">Software developer with 10 years of experience in gathering software requirements, development and continuous delivery, having achieved the following results:</p>
+<ul>
+<li> Implemented a software development process that made the company be more efficient on deliveries and also that made the company achieve the first level of the CMMI certification.</li>
+<li> While developing a system for issuing electronic invoices, made the processes faster, cheaper and compliant with local regulations.</li>
+<li> Developed a tool to improve assertiveness and speed up the process of making decisions about industrial equipments maintenance.</li>
+</ul>
+<p>Profiles:</p>
+<ul>
+<li><a target="_blank" href="https://www.linkedin.com/in/endrigoantonini">LinkedIn</a></li>
+<li><a target="_blank" href="https://www.github.com/antonini">GitHub</a></li>
+<li><a target="_blank" href="https://stackoverflow.com/users/1501876/endrigoantonini">Stack Overflow</a></li>
+</ul>
 <!--
   <p class="intro">Long Haul is a minimal, long form <a href="http://jekyllrb.com">Jekyll</a> Theme. It can be used as is or customized to your hearts desire.</p>
 	<p>Long Haul was created in honor of all the hard working touring bicycles that have traversed the globe time and time again. Take it for a spin.</p>
