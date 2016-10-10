@@ -10,7 +10,7 @@ paginate_path: 'page/:num/'
 permalink: :year/:month/:day/:title/
 timezone: America/Sao_Paulo
 
-markdown: redcarpet
+markdown: kramdown
 highlighter: pygments
 paginate: 10
 
