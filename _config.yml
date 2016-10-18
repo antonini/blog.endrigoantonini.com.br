@@ -11,7 +11,7 @@ permalink: :year/:month/:day/:title/
 timezone: America/Sao_Paulo
 
 markdown: kramdown
-highlighter: pygments
+highlighter: rouge
 paginate: 10
 
 include: [.htaccess]
