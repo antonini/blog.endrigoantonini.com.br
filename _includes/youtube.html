@@ -1,0 +1,22 @@
+{% assign videoheight = include.height %}
+{% unless videoheight %}
+{% assign videoheight = 315 %}
+{% endunless %}
+
+{% assign videowidth = include.width %}
+{% unless videowidth %}
+{% assign videowidth = 560 %}
+{% endunless %}
+
+{% assign videocentered = include.centered %}
+{% unless videocentered %}
+{% assign videocentered = "false" %}
+{% endunless %}
+
+{% if "yes" == videocentered %}
+<center>
+{% endif %}
+<iframe width="{{ videowidth }}" height="{{ videoheight }}" src="https://www.youtube.com/embed/{{ include.id }}" frameborder="0" allowfullscreen></iframe>
+{% if "yes" == videocentered %}
+</center>
+{% endif %}
