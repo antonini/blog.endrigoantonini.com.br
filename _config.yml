@@ -2,6 +2,7 @@ title: Endrigo Antonini
 description: Tecnologia, Informa&#231;&#227;o, Atualidade
 url: http://blog.endrigoantonini.com.br
 baseurl: ''
+future: true
 
 author:
   name: 'Endrigo Antonini'
@@ -16,7 +17,7 @@ paginate: 10
 
 include: [.htaccess]
 
-gems:
+plugins:
  # - jekyll-mentions
  - jemoji
  - jekyll-redirect-from
