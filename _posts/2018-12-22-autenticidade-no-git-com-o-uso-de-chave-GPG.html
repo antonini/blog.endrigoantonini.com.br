@@ -8,8 +8,8 @@ author:
   url: http://blog.endrigoantonini.com.br
 author_url: http://blog.endrigoantonini.com.br
 excerpt: "É muito comum o uso do git no dia a dia, seja ele para controlar o código fonte de sua organização, projetos pessoais ou outras funcionalidades. Enquanto o repositório é utilizado por apenas uma pessoa e até mesmo em grandes corporações é difícil que alguém faça a seguinte pergunta: \"Mas o que garante que aquele commit foi determinada pessoa quem fez?\"."
-date: '2016-10-09 23:15:00 -0300'
-date_gmt: '2016-10-09 23:15:00 -0300'
+date: '2018-12-22 12:00:00 -0300'
+date_gmt: '2018-12-22 12:00:00 -0300'
 categories:
 - Tecnologia
 - Segurança
@@ -23,10 +23,10 @@ tags:
 comments: []
 ---
 
-<p><img class="alignleft wp-image-998 size-medium" src="/wp-content/uploads/2016/10/git-scm.png" alt="git-scm-logo" style="float: left; margin: 10px;" />É muito comum o uso do git no dia a dia, seja ele para controlar o código fonte de sua organização, projetos pessoais ou outras funcionalidades. Enquanto o repositório é utilizado por apenas uma pessoa ou até mesmo em grandes corporações é difícil que seja feito a seguinte pergunta: <i>"Mas o que garante que aquele commit foi determinada pessoa que o fez?"</i>.</p>
+<p><img class="alignleft wp-image-998 size-medium" src="/wp-content/uploads/2016/10/git-scm.png" alt="git-scm-logo" style="float: left; margin: 10px;" />É muito comum o uso do git no dia a dia, seja ele para controlar o código fonte de sua organização, projetos pessoais entre outros. Mas uma coisas que é comum em qualquer ambiente é de que as pessoas façam a seguinte pergunta: <i>"Mas o que garante que aquele commit realmente foi determinada pessoa que o fez?"</i>.</p>
 
 <p>Essa é uma pergunta que quase não é feita, mas que todo desenvolvedor, product owner, product manager deveria fazer. Isso pois todo commit está atrelado a um nome e um e-mail, mas não existem travas que impeçam que uma pessoa utilize o nome e e-mail de outra para realizar commits.<br/>
-O GIT é um repositório descentralizado e é tão aberto e permissivo que não é necessário a existência de um nó principal para que um projeto exista ou seja controlado por ele. Hipoteticamente falando, o protocolo permite que um determinado "<i>desenvolvedor A</i>" possa ter acesso ao repositório que está armazenado na máquina do "<i>desenvolvedor B</i>" sem que ele faça qualquer consulta no ao servidor que eles utilizaram para fazer o clone, isso sem levar em conta controle de acesso que é aplicado em outras camadas.</p>
+O GIT é um repositório descentralizado e é tão aberto e permissivo que não é necessário a existência de um nó principal para que um projeto exista ou seja controlado por ele. Hipoteticamente falando, o protocolo permite que um determinado "<i>desenvolvedor A</i>" possa ter acesso ao repositório que está armazenado na máquina do "<i>desenvolvedor B</i>" sem que ele faça qualquer consulta ao servidor que eles utilizaram para fazer o clone, isso sem levar em conta controle de acesso que é aplicado em outras camadas.</p>
 
 <p>Apesar de o cenário descrito acima não ser tão comum, nada impede que uma pessoa faça o clone de um repositório, configure o git local para utilizar o nome "John Doe" e email "fulano@example.com" execute qualquer alteração, realizar o commit e mandar este commit para um repositório em comum (Exemplo: GitHub, GitLab, Bitbucket...) ou mesmo submeta para o repositório do colaborador que foi utilizado como ponto de partida para o <i>git clone</i>. (Óbvio, para realizar o clone e pull é primordial ter permissão de leitura e o push permissão de escrita no repositório).</p>
 
@@ -34,7 +34,7 @@ O GIT é um repositório descentralizado e é tão aberto e permissivo que não 
 
 <p>E como resolver esse problema?</p>
 
-<p>A resolução dessa situação é através do uso de chaves GPG, onde cada desenvolvedor utiliza um par de chaves para assinar aquele commit e assim garantir a autenticidade deste.</p>
+<p>Essa situação pode ser resolvida usando chaves GPG, onde cada desenvolvedor utiliza um par de chaves para assinar aquele commit e assim garantir a autenticidade deste.</p>
 
 <p>Não irei abordar nesse artigo como gerar uma chave GPG (quem sabe seja conteúdo para um próximo post). Por isso vou considerar que você já possui o cliente GPG instalado e um par de chaves criado. <strong>Vale lembrar que o e-mail utilizado na chave GPG também deve ser o mesmo utilizado nas configurações do GIT.</strong> Com o par de chaves na máquina iremos realizar a configuração para que o GIT utilize o GPG para assinar todos os seus commits.</p>
 
@@ -65,9 +65,9 @@ $ git config --global commit.gpgsign true
 <p>Outros repositórios como Bitbucket e GitLab possuem essa funcionalidade no backlog mas ainda não foram implementados. Considerando que você não utiliza o GitHub, ou que você não utiliza nenhum gerenciador, execute o comando abaixo para exibir informações de assinatura do commit.</p>
 {% highlight bash %}
 # Exibe no log informações de assinatura do commit
-$ git --show-signature log
+$ git log --show-signature
 # Exibe informações de assinatura do commit selecionado
-$ git --show-signature show <commit_hash>
+$ git show --show-signature <commit_hash>
 {% endhighlight %}
 <p><strong>Conclusão</strong></p>
 <p>As ações acima fazem com que seu repositório se torne muito mais seguro nos quesitos de integridade e também de não repúdio. Isso pois com o uso dessa configuração garantimos que o commit que está no repositório foi criado por aquela pessoa efetivamente.</p>
