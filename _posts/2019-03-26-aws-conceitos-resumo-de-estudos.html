@@ -1,0 +1,92 @@
+---
+layout: post
+status: publish
+published: true
+title: AWS - Conceitos - Resumo de estudos
+author: Endrigo Antonini
+author_url: http://blog.endrigoantonini.com.br
+excerpt: "Post utilizado para armazenar pontos que julgo importante quanto ao ambiente da AWS"
+date: '2019-03-26 08:00:00 -0300'
+date_gmt: '2018-03-26 08:00:00 -0300'
+cover:  '/assets/instacode.png'
+categories:
+- Tecnologia
+- Cloud
+tags:
+- Cloud
+- Tecnologia
+- AWS
+- Estudos
+- Desenvolvimento
+- Segurança
+- Funcionalidades
+---
+
+
+<p><img class="alignleft wp-image-998 size-medium" src="/wp-content/uploads/2019/04/amazon-web-services-logo-13.png" alt="amazon-web-services-logo" style="float: left; margin: 10px;" />Iniciei recentemente os estudos quanto a plataforma, serviços e os recursos que são disponibilizados na AWS. Estou cursando o <a href="https://www.coursera.org/learn/aws-fundamentals-going-cloud-native"><strong>AWS Fundamentals: Going Cloud-Native</strong></a> via a portal de e-Learning <a href="https://www.coursera.org">Coursera</a>.</p>
+<p>O objetivo desse post é de servir como bloco de notas com destaques e conceitos importantes que tenha aprendido durante esse treinamento, bem como de agregar meu ponto de vista e outras informações que eu também jugar necessária.</p>
+<p>Para evitar que o conteúdo fique muito extenso e maçante irei quebrar o conteúdo em vários posts sendo esse o primeiro de <strong><i>N</i></strong> posts.</p>
+
+<h3>O que é cloud?</h3>
+<p>Existem várias formas de explicar o conceito. A maior parte dos materiais que tratam a respeito acabam apenas tratando dos pontos técnicos para apresentar o que seria a <strong>nuvem</strong> (tradução de Cloud). Por isso acredito que a definição que foi feita durante o curso é extremamente simples e é capaz de fazer com que pessoas não técnicas consigam também entender a definição de Cloud:</p>
+<h5>On-demand</h5>
+<p>Sob demanda, isso é, você utiliza recursos e serviços somente quando precisa. Em muitas organizações esse é um drama tremendo pois, quando estiver iniciando um projeto, precisa prever o tamanho da infraestrutura que vai precisar para 5 anos de projetos. Isso sem mesmo ter a garantia de que o mesmo irá vingar.</p>
+<h5>Pay-as-you-go</h5>
+<p>Pay-as-you-go, na tradução livre <strong><i>pague o que utilizar</i></strong>, é uma visão diferente quanto a forma de pagar pelos recursos que você está utilizando, isso é, se nesse momento você precisa apenas de um servidor para aguentar a carga que sua aplicação terá, por que configurar 6 servidores nesse momento se isso é um recurso que você está prevendo para daqui 1 a 2 anos de projeto? Esse modelo auxilia bastante pessoas e empresas a poderem realizar a famosa experimentação quando estiverem montando seu <strong>MVP</strong>, fazendo com que o custo dessa primeira implementação não seja exorbitante e que possa inviabilizar o projeto como um todo.</p>
+<h5>Serviços através da Internet</h5>
+<p>Permite que funcionalidades e serviços de TI sejam entregues para a organização através da internet de forma segura, isso é, se bem configurado e seguindo procedimentos que garantam a segurança do ambiente e também dos serviços que estejam nela publicados.</p>
+
+<h3>Por que cloud?</h3>
+<p>Essa é uma boa pergunta! Normalmente quando vamos falar com pessoas que estão acostumadas a utilizarem todos os recursos dentro do próprio Data Center (<i>on-premises</i>) acabamos escutando perguntas do tipo: "<strong><i>Porque eu deveria migrar para a Cloud se eu tenho a infraestrutura?</i></strong>", "<strong><i>É melhor a gente comprar todos os servidores que estamos acreditando que o projeto vai precisar!</i></strong>". Aqui vão alguns pontos que eu pessoalmente utilizaria para responder esse tipo de questionamento:</p>
+<ul>
+	<li><i>"Deveríamos nos preocupar com o nosso diferencial de mercado, com o que mais sabemos fazer (core business) e não com coisas que são padrões e comuns para qualquer organização."</i></li>
+	<li><i>"Não deveríamos investir tanto dinheiro em infraestrutura de largada para projetos que estão sendo testados pela empresa e podem ser cancelados do dia para a noite"</i></li>
+	<li><i>"A infraestrutura da nossa aplicação deveria estar dimensionada para o momento, com uma certa folga, e não para <u>anos luz</u> a frente do momento."</i></li>
+</ul>
+<p>Esse seria o início da minha linha de raciocínio para responder questionamentos nesse nível.</p>
+
+<h3>Modelos computacionais na nuvem</h3>
+<p>Existem algumas formas de publicar e executar uma aplicação. A mais utilizada é denominada de "on-premises". Essa classificação indica que toda a aplicação está rodando dentro da própria empresa, isso é, o servidor de aplicação, banco de dados e outros serviços que são utilizados pela aplicação estão instalados em servidores que são geridos pela própria empresa em seu Datacenter. Além desse modelo, temos também os modelos abaixo:</p>
+<h5>Infraestrutura como serviço - <i>Infrastructure as a Service (IaaS)</i></h5>
+<p>Fazendo uma escadinha quanto a <i>terceirização dos seus recursos de TI</i>, podemos afirmar que esse é o modelo menos intrusivo para a empresa contratante, isso é, quando você utiliza um provedor cloud em modelo de <i>IaaS</i>, você estará recebendo, como o próprio nome indica, infraestrutura! Isso quer dizer que você irá receber um computador (ou equipamentos de rede), mas será sua responsabilidade gerencia-lo, configura-lo e mante-lo atualizado. Tirando o fator de que o computador (nesse exemplo) não está rodando em seu datacenter, esse é o modelo mais próximo do modelo tradicional <i>on-premises</i>.</p>
+<p>Para exemplificar esse caso, vamos dizer que você precisa publicar o site da empresa. Tanto no modelo <i>on-premises</i> quanto no modelo <i>IaaS</i> você precisará configurar o sistema operacional do computador, instalar um servidor web e configurar sua página web para ser executada dentro dessa aplicação. A grande diferença entre o <i>on-premises</i> e o <i>IaaS</i> é onde esse serviço está executando e as responsabilidades que você delegou para um terceiro.</p>
+<h5>Plataforma como serviço - <i>Platform as a Service (PaaS)</i></h5>
+<p>Continuando nossa escalada quanto aos modelos, podemos afirmar que no modelo <i>PaaS</i> você delega um pouco mais de responsabilidade pro provedor e espera receber um serviço de mais alto nível em comparação ao <i>IaaS</i>.</p>
+<p>Seguindo o exemplo anterior onde você deseja publicar o site da empresa, no modelo <i>PaaS</i> você iria contratar diretamente o servidor web. Mas mesmo assim você precisaria configura-lo para atender as suas necessidades e publicar o site. A responsabilidade de gerenciar o sistema operacional que executa esse servidor é do provedor de serviço <i>Cloud</i>.</p>
+<h5>Software como serviço - <i>Software as a Service (SaaS)</i></h5>
+<p>A maioria das pessoas já consomem serviços através desse modelo mas não se dão conta, isso é, esse modelo indica que você está contratando um software e a sua responsabilidade é apenas de utiliza-lo e de fornecer/consumir os dados ali publicados.</p>
+<p>Dando continuidade do exemplo de publicação do site da empresa, nesse cenário iríamos contratar um provedor onde ele fornece e gerencia inclusive o servidor web, isso é, você seria responsável apenas em publicar as informações.</p>
+<p>Outro exemplo clássico de <i>SaaS</i> é a própria forma de utilizar o e-mail através de serviços como Google, Microsoft e afins. Onde você, como usuário, apenas acessa a aplicação web e manda seu e-mail sem nem ao menos precisar se questionar quais são as configurações que estão aplicadas no servidor.</p>
+
+<h3>Modelos de publicação de aplicação</h3>
+<p>Apesar de termos falado de <i>on-premises</i> quanto a modelo computacional na nuvem, na verdade o mesmo é explicado dentro de modelos de publicação (deploy). Abaixo estão a explicação dos três modelos, onde temos dois extremos e um modelo híbrido.</p>
+<h5>On-premises</h5>
+<p>É quando a aplicação está publicada em maquinas virtuais dentro da própria infraestrutura da empresa. Em sua maioria das vezes o modelo de publicação de aplicação segue um modelo muito parecido com as aplicações legadas da empresa porém através do uso de algumas tecnologias mais recentes como virtualização e gerenciamento de aplicação. Por esse motivo, esse tipo de infraestrutura algumas vezes é denominado de "cloud privada"</p>
+<h5>Cloud</h5>
+<p>Trata-se de quando a aplicação e todos os componentes que essa depende estão publicados e rodando em um provedor externo a empresa. Independentemente de estar utilizando IaaS, PaaS ou SaaS todos os componentes da mesma não estão internalizados na empresa.</p>
+<h5>Híbrida</h5>
+<p>Como o próprio nome sugere é a mistura dos dois mundos anteriores, onde a aplicação executa parte dentro da infraestrutura da empresa e parte em um provedor de cloud. Esse modelo muitas vezes é utilizado para permitir que a empresa possa ganhar a elasticidade que um provedor de cloud pode prover sem perder o acesso a sistemas e controles legados.</p>
+
+<h3>Outras informações da AWS</h3>
+<p>A AWS possui uma área de Produtos e Serviços, isso pois a mesma trabalha tanto como IaaS, PaaS e/ou SaaS. Digo e/ou pois você não é obrigado a utilizar apenas um desses modelos! Não existe regra para isso e nem mesmo algo que te prenda a utilizar apenas um modelo. Os serviços oferecidos pela AWS vão desde armazenamento de arquivo, CDN a até mesmo produtos relacionados a IoT.</p>
+<p>A mesma também possui o chamado <i>APN - AWS Partner Network</i>. Como o próprio nome sugere, trata-se de empresas parceiras da AWS que possuem como objetivo auxiliar seus clientes a terem sucesso na conversão de produtos e plataformas para a <i>Cloud</i>.</p>
+<p>Dentro da AWS você também irá encontrar uma área denominada de <i>AWS Marketplace</i>, isso é, a mesma permite que você venda seu serviço para pessoas que utilizam os serviços da AWS.</p>
+
+
+<h3>Regiões</h3>
+<p>Regiões (regions) dentro da AWS são locais onde os Datacenters estão instalados. Vale a pena ressaltar que uma região é auto contida e possui todos os serviços necessários para rodar independentemente do estado de qualquer outra região. Outro ponto importante para lembrar é que cada região está em acordo com suas leis locais, isso é, servidores que estão no Brasil, por exemplo, devem seguir a LGPD (Lei Geral de Proteção de Dados), já os que estão em países dentro da União Europeia devem seguir a GDPR (General Data Protection Regulation) e assim por diante.</p>
+<p>Ainda quanto a regiões, vale a pena ressaltar que uma região tem por definição ter no mínimo dois datacenters (eles denominam de <i>Availability Zones</i>) ativos e distantes entre si para evitar situações de desastre (Durante a criação desse post a AWS possui 3 Availability Zones em 1 região em São Paulo). A aplicação pode estar em execução simultaneamente em mais de um datacenter e isso não é um problema pois todos esses datacenter são conectados através de várias redes de fibra óptica fazendo com que a latencia entre elas tenda para nulo.</p>
+<p>Para decidir em que região levantar suas aplicações, existem algumas perguntas chaves que podem te ajudar na tomada de decisão:</p>
+<ul>
+	<li><strong>Onde a maioria dos meus clientes estão localizados?</strong> Se a grande maioria está no Brasil, não faz tanto sentido colocar os servidores na Austrália, por exemplo.</li>
+	<li><strong>Quanto estou disposto a pagar?</strong> Nem toda região tem o mesmo preço para os mesmos produtos, por isso é importante levar em consideração o custo da operação também.</li>
+	<li><strong>Eu tenho alguma restrição legal?</strong> Existem mercados que são regulados por normativas e leis. Por isso é importante verificar se sua empresa está enquadrada em alguma dessas leis que a obrigaria, por exemplo, a manter todos os dados armazenados em território nacional.</li>
+	<li><strong>Os serviços que eu preciso estão disponíveis nessa região?</strong> A Amazon publica de forma periódica vários novos produtos e serviços, mas nem sempre em todas as regiões simultaneamente. Por isso é preciso verificar antes de escolher a região se o serviço desejado está disponível nela.</li>
+</ul>
+
+<h3>Conclusões</h3>
+<p>Esse post contém informações e conceitos gerais sobre <i>Cloud</i>, modelos computacionais e de <i>deploy</i>. Nele também foi possível verificar uma rápida introdução sobre conceitos que começam a permear o ecossistema da AWS, como Regiões e <i>Availability Zones</i>.</p>
+
+
+
+
