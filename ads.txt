@@ -1,1 +1,2 @@
 google.com, pub-6910124936664106, DIRECT, f08c47fec0942fa0
+subdomain=blog.endrigoantonini.com.br
