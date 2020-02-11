@@ -1,0 +1,65 @@
+---
+layout: post
+status: publish
+published: true
+title: Cloudflare DNS e WAF + Let's Encrypt
+author: Endrigo Antonini
+author_url: http://blog.endrigoantonini.com.br
+excerpt: "Automatizando o processo de deploy de certificado usando Let's Encrypt e Cloudflare DNS e WAF"
+date: '2020-02-10 23:30:00 -0300'
+date_gmt: '2020-02-10 23:30:00 -0300'
+cover:  '/assets/img/landspace-tech-2.png'
+categories:
+- Tecnologia
+- Cloud
+tags:
+- Cloud
+- Tecnologia
+- AWS
+- Estudos
+- Desenvolvimento
+- Segurança
+- Funcionalidades
+---
+
+
+<p><img class="alignleft wp-image-998 size-medium" src="/wp-content/uploads/2020/02/cloudflare-logo-5.png" alt="cloudflare-logo" style="float: left; margin: 10px;" />O objetivo desse post é para descrever uma "deploy-hook" para o certbot (<a href="https://www.github.com/certbot/certbot" target="_blank">Certbot</a> é uma ferramenta para obter certificados do Let`s Encrypt) que desenvolvi.</p>
+
+<p>O certbot possui um plugin para integrar com a Cloudflare, porém esse atua apenas na etapa de autenticação do processo de geração do certificado. Isso é, ele apenas atua no processo de resposta do desafio para entre os servidores do Let`s Encrypt e o DNS da Cloudflare deixando para traz o processo de efetuar o deploy da chave privada e do certificado assinado na Cloudflare.</p>
+
+<p>Por esse motivo criei um projeto denomidado <a href="http://github.com/antonini/certbot-hooks/" target="_blank">certbot-hooks</a> para armazenar as hooks que serão utilizadas no processo de geração de certificados. Nesse momento o projeto contém apenas uma hook denominada <i>cloudflare-deploy.py</i>. Abaixo vou descrever como ele funciona e a forma de utiliza-lo.</p>
+
+<h5>cloudflare-deploy.py</h5>
+
+<h3>Geral</h3>
+
+<p>Essa hook foi criado devido à situação onde é utilizado a Cloudflare como servidor DNS e também como WAF e existe o desejo de utilizar o Let`s Encrypt para gerar um certificado para a conexão.</p>
+
+<p>Então você deve utilizar a Cloudflare para autenticar o certbot usando um registro DNS (consulte o plug-in certbot-dns-cloudflare do certbot que ele é responsável por essa etapa) e também precisa configurar sua chave privada e certificado no Cloudflare. Sendo que sem essa hook essa última etapa é manual.</p>
+
+<p>Essa hook foi criado com o objetivo de realizar essa ação. Publicar a chave privada e o certificado na Cloudflare.</p>
+
+<h3>Instalando</h3>
+
+<p>Clonar o repositório em algum diretório. Para esse exemplo iremos utilizar o diretório <i>/opt</i> fazendo com que o repositório esteja em <i>/opt/certbot-hooks</i> conforme exemplo abaixo.</p>
+
+<p>{% highlight bash %}
+cd /opt
+git clone https://www.github.com/certbot/certbot
+{% endhighlight %}</p>
+
+<p>A linha de comando a seguir vai gerar um par de chaves localmente e responder o processo de desafio dos servidores do Let`s Encrypt e posteriormente chamar a hook para realizar o deploy do arquivo na Cloudflare.</p>
+
+<p>{% highlight bash %}
+sudo certbot certonly \
+  --dns-cloudflare \
+  --deploy-hook /opt/certbot-hooks/cloudflare-deploy.py \
+  --dns-cloudflare-credentials ~/.secrets/certbot/cloudflare.ini \
+  --dns-cloudflare-propagation-seconds 5 \
+  -d example.com
+{% endhighlight %}
+</p>
+
+<hr/>
+
+<p>Caso tenha alguma dúvida, sugestão de melhoria no código ou até queira publicar alguma hook que desenvolveu para o projeto certbot fique a vontade para entrar em contato, criar uma Issue ou até fazer um pull request.</p>
