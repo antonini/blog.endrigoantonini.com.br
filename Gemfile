@@ -14,4 +14,4 @@ gem 'rake'
 gem 'sass'
 gem 'uglifier'
 gem 'jekyll-paginate'
-
+gem 'jekyll-commonmark-ghpages'
