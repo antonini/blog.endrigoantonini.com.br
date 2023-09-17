@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-#gem 'github-pages', '~> 31'
-gem 'activesupport', '> 6.1.7.5'
 gem 'github-pages', group: :jekyll_plugins
 gem 'jemoji'
 gem 'rouge'
